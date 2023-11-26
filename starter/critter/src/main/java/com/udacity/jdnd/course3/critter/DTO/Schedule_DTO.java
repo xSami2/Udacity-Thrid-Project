@@ -1,6 +1,6 @@
-package com.udacity.jdnd.course3.critter.schedule;
+package com.udacity.jdnd.course3.critter.DTO;
 
-import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
+import com.udacity.jdnd.course3.critter.Enum.EmployeeSkillEnum;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,12 +10,12 @@ import java.util.Set;
  * Represents the form that schedule request and response data takes. Does not map
  * to the database directly.
  */
-public class ScheduleDTO {
+public class Schedule_DTO {
     private long id;
     private List<Long> employeeIds;
     private List<Long> petIds;
     private LocalDate date;
-    private Set<EmployeeSkill> activities;
+    private Set<EmployeeSkillEnum> activities;
 
     public long getId(){
         return id;
@@ -49,11 +49,11 @@ public class ScheduleDTO {
         this.date = date;
     }
 
-    public Set<EmployeeSkill> getActivities() {
+    public Set<EmployeeSkillEnum> getActivities() {
         return activities;
     }
 
-    public void setActivities(Set<EmployeeSkill> activities) {
+    public void setActivities(Set<EmployeeSkillEnum> activities) {
         this.activities = activities;
     }
 }
