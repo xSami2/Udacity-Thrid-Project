@@ -15,7 +15,7 @@ public class Employee_DTO {
     private long id;
     private String name;
     private Set<EmployeeSkillEnum> skills;
-    private Set<DayOfWeek> daysAvailable;
+    private Set<DayOfWeek> employee_availability;
 
 
 }

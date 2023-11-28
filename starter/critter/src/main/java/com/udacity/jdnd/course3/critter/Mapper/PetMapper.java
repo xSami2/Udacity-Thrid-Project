@@ -15,4 +15,10 @@ public class PetMapper {
         BeanUtils.copyProperties(petDto , petEntity);
         return petEntity;
     }
+
+    public Pet_DTO  PetEntityToDTO(PetEntity petEntity){
+        Pet_DTO petDto = new Pet_DTO();
+        BeanUtils.copyProperties(petEntity , petDto);
+        return petDto;
+    }
 }

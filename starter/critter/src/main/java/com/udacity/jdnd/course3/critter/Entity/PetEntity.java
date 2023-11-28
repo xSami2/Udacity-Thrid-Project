@@ -34,6 +34,7 @@ public class PetEntity {
     private String notes;
 
     @Column(name = "pet_ownerId")
+
     private long ownerId;
 
     @Column(name = "created_at", nullable = false, updatable = false)

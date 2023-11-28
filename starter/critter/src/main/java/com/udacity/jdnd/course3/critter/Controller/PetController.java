@@ -23,9 +23,10 @@ public class PetController {
 
 
     @PostMapping
-    public void savePet(@RequestBody Pet_DTO petDTO) {
+    public Pet_DTO savePet(@RequestBody Pet_DTO petDTO) {
         PetEntity petEntity = petMapper.PetDTOtoEntity(petDTO);
         petService.savePet(petEntity);
+       return petMapper.PetEntityToDTO(petEntity);
     }
 
     @GetMapping("/{petId}")

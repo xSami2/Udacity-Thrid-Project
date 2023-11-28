@@ -32,13 +32,15 @@ public class UserController {
     }
 
     @PostMapping("/customer")
-    public void saveCustomer(@RequestBody Customer_DTO customerDTO){
-        CustomerEntity customerEntity =  userMapper.CustomerDTOtoEntity(customerDTO);
-        userService.saveCustomer(customerEntity);
+    public Customer_DTO saveCustomer(@RequestBody Customer_DTO customerDTO){
+               CustomerEntity customerEntity =  userMapper.CustomerDTOtoEntity(customerDTO);
+      return   userService.saveCustomer(customerEntity);
     }
 
     @GetMapping("/customer")
-    public List<Customer_DTO> getAllCustomers(){throw new UnsupportedOperationException();}
+    public List<Customer_DTO> getAllCustomers(){
+        return userService.getAllCustomers();
+    }
 
     @GetMapping("/customer/pet/{petId}")
     public Customer_DTO getOwnerByPet(@PathVariable long petId){
@@ -47,33 +49,25 @@ public class UserController {
 
     @PostMapping("/employee")
     public Employee_DTO saveEmployee(@RequestBody Employee_DTO employeeDTO) {
-
-        // Convert DTO to Entity
         EmployeeEntity employeeEntity = userMapper.EmployeeDTOtoEntity(employeeDTO);
-        System.out.println(employeeDTO.toString());
-        System.out.println(employeeEntity.toString());
-        // Save the employee entity
-        EmployeeEntity savedEmployee = userService.saveCustomer(employeeEntity);
-
-        // Convert the saved entity back to DTO
-
-        // Return the DTO
-        return userMapper.EmployeeEntityToDTO(savedEmployee);
+        userService.saveEmployee(employeeEntity);
+        return userMapper.EmployeeEntityToDTO(employeeEntity);
     }
 
     @PostMapping("/employee/{employeeId}")
     public Employee_DTO getEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+       return userService.getEmployee(employeeId);
     }
 
     @PutMapping("/employee/{employeeId}")
-    public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+    public Employee_DTO setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
+        EmployeeEntity employeeEntity = userService.setEmployeeAvailability(daysAvailable , employeeId);
+        return userMapper.EmployeeEntityToDTO(employeeEntity);
     }
 
     @GetMapping("/employee/availability")
     public List<Employee_DTO> findEmployeesForService(@RequestBody EmployeeRequest_DTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        return userService.findEmployeesForService(employeeDTO.getDate() , employeeDTO.getSkills());
     }
 
 }
