@@ -5,10 +5,12 @@ import com.udacity.jdnd.course3.critter.DTO.Customer_DTO;
 import com.udacity.jdnd.course3.critter.DTO.Employee_DTO;
 import com.udacity.jdnd.course3.critter.Entity.CustomerEntity;
 import com.udacity.jdnd.course3.critter.Entity.EmployeeEntity;
+import com.udacity.jdnd.course3.critter.Entity.PetEntity;
 import com.udacity.jdnd.course3.critter.Enum.EmployeeSkillEnum;
 import com.udacity.jdnd.course3.critter.Mapper.UserMapper;
 import com.udacity.jdnd.course3.critter.Repository.CustomerRepository;
 import com.udacity.jdnd.course3.critter.Repository.EmployeeRepository;
+import com.udacity.jdnd.course3.critter.Repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +25,22 @@ public class UserService {
 
     private final CustomerRepository customerRepository;
     private final EmployeeRepository employeeRepository;
+    private final PetRepository petRepository;
     private final UserMapper userMapper;
 
 
 
-    public Customer_DTO saveCustomer(CustomerEntity customerEntity){
+    public Customer_DTO saveCustomer(Customer_DTO customerDto){
+        CustomerEntity customerEntity = userMapper.CustomerDTOtoEntity(customerDto);
         customerRepository.save(customerEntity);
        return userMapper.CustomerEntityToDTO(customerEntity);
     }
 
-    public void saveEmployee(EmployeeEntity employeeEntity){
-         employeeRepository.save(employeeEntity);
+    public Employee_DTO saveEmployee(Employee_DTO employeeDTO){
+        EmployeeEntity employeeEntity = userMapper.EmployeeDTOtoEntity(employeeDTO);
+        employeeRepository.save(employeeEntity);
+        return  userMapper.EmployeeEntityToDTO(employeeEntity);
+
     }
 
     public EmployeeEntity setEmployeeAvailability(Set<DayOfWeek> daysAvailable , Long employeeId ) {
@@ -62,6 +69,19 @@ public class UserService {
         List<Customer_DTO> customerDTOs = new ArrayList<>();
          Iterable<CustomerEntity> customerEntities =  customerRepository.findAll();
         return userMapper.CustomerEntityListToDTO(customerEntities);
+    }
+    public Customer_DTO getOwnerByPetId(Long petId){
+        System.out.println(petId);
+
+        Optional<PetEntity> petEntity = petRepository.findById(petId);
+        if (petEntity.isPresent()) {
+            long ownerId = petEntity.get().getOwnerId();
+            return customerRepository.findById(ownerId)
+                    .map(userMapper::CustomerEntityToDTO)
+                    .orElse(null);
+        }
+
+        return null;
     }
 
 

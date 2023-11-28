@@ -33,8 +33,7 @@ public class UserController {
 
     @PostMapping("/customer")
     public Customer_DTO saveCustomer(@RequestBody Customer_DTO customerDTO){
-               CustomerEntity customerEntity =  userMapper.CustomerDTOtoEntity(customerDTO);
-      return   userService.saveCustomer(customerEntity);
+      return   userService.saveCustomer(customerDTO);
     }
 
     @GetMapping("/customer")
@@ -44,14 +43,12 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public Customer_DTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
+        return userService.getOwnerByPetId(petId);
     }
 
     @PostMapping("/employee")
     public Employee_DTO saveEmployee(@RequestBody Employee_DTO employeeDTO) {
-        EmployeeEntity employeeEntity = userMapper.EmployeeDTOtoEntity(employeeDTO);
-        userService.saveEmployee(employeeEntity);
-        return userMapper.EmployeeEntityToDTO(employeeEntity);
+        return userService.saveEmployee(employeeDTO);
     }
 
     @PostMapping("/employee/{employeeId}")
