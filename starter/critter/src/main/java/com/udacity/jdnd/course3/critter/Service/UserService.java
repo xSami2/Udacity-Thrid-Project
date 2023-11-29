@@ -20,7 +20,6 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-
 public class UserService {
 
     private final CustomerRepository customerRepository;
@@ -70,7 +69,6 @@ public class UserService {
         return userMapper.CustomerEntityListToDTO(customerEntities);
     }
     public Customer_DTO getOwnerByPetId(Long petId){
-        System.out.println(petId);
 
         Optional<PetEntity> petEntity = petRepository.findById(petId);
         if (petEntity.isPresent()) {

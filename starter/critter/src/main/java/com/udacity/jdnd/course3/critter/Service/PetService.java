@@ -37,7 +37,6 @@ public class PetService {
     }
 
     public List<Pet_DTO> getPetsByOwnerId(Long ownerId){
-        System.out.println(petRepository.findByOwnerId(ownerId));
         Iterable<PetEntity> petEntities = petRepository.findByOwnerId(ownerId);
        return petMapper.PetEntityListToDTO(petEntities);
     }

@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/pet")
 public class PetController {
 
-    private final PetMapper petMapper;
     private final PetService petService;
 
 

@@ -19,5 +19,4 @@ public class Schedule_DTO {
     private LocalDate date;
     private Set<EmployeeSkillEnum> activities;
 
-
 }
