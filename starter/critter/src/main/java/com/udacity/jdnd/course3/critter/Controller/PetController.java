@@ -24,23 +24,21 @@ public class PetController {
 
     @PostMapping
     public Pet_DTO savePet(@RequestBody Pet_DTO petDTO) {
-        PetEntity petEntity = petMapper.PetDTOtoEntity(petDTO);
-        petService.savePet(petEntity);
-       return petMapper.PetEntityToDTO(petEntity);
+       return petService.savePet(petDTO);
     }
 
     @GetMapping("/{petId}")
     public Pet_DTO getPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+       return petService.getPetById(petId);
     }
 
     @GetMapping
     public List<Pet_DTO> getPets(){
-        throw new UnsupportedOperationException();
+        return petService.getAllPets();
     }
 
     @GetMapping("/owner/{ownerId}")
     public List<Pet_DTO> getPetsByOwner(@PathVariable long ownerId) {
-        throw new UnsupportedOperationException();
+       return petService.getPetsByOwnerId(ownerId);
     }
 }

@@ -66,8 +66,7 @@ public class UserService {
     }
 
     public List<Customer_DTO> getAllCustomers(){
-        List<Customer_DTO> customerDTOs = new ArrayList<>();
-         Iterable<CustomerEntity> customerEntities =  customerRepository.findAll();
+        Iterable<CustomerEntity> customerEntities =  customerRepository.findAll();
         return userMapper.CustomerEntityListToDTO(customerEntities);
     }
     public Customer_DTO getOwnerByPetId(Long petId){
