@@ -7,6 +7,8 @@ import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -26,8 +28,14 @@ public class CustomerEntity {
     private String phoneNumber;
 
 
+    @OneToMany(mappedBy = "customerEntity" , cascade = CascadeType.ALL)
+    List<PetEntity> petEntities;
+
+
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
 
 
 
