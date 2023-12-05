@@ -7,9 +7,12 @@ import com.udacity.jdnd.course3.critter.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
+
 @RequiredArgsConstructor
 public class ScheduleService {
 

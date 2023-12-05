@@ -14,11 +14,13 @@ import com.udacity.jdnd.course3.critter.Repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserService {
 
